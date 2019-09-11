@@ -50,10 +50,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
     // CRUD
-
-    Route::resource('departamentos', 'DepartamentosController')->middleware('auth:admin');
     Route::resource('empresa', 'EmpresaController')->middleware('auth:admin');
 
+    Route::resource('departamentos', 'DepartamentosController')->middleware('auth:admin');
+    Route::get('departamentos/destruir/{id}', 'DepartamentosController@destroy')->name('admin.departamento.destruir')->middleware('auth:admin');
 
 
     Route::resource('empleados', 'EmpleadosController')->middleware('auth:admin');

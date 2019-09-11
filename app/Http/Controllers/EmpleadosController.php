@@ -19,7 +19,7 @@ class EmpleadosController extends Controller{
         if($departamentos->isEmpty()){
             $departamentosExists= false;
         }
-        return view('empleados', compact('departamentos', 'empleados', 'departamentosExists'));
+        return view('prueba', compact('departamentos', 'empleados', 'departamentosExists'));
     }
 
     public function create()
@@ -48,7 +48,7 @@ class EmpleadosController extends Controller{
             'escolaridad'=>'required',
             'departamento'=>'required'
         ]);
-        return 'Paso Validaciones';
+//        return 'Paso Validaciones';
         $e= new User;
         $e->nombre=$request->get('nombre');
         $e->apaterno=$request->get('apaterno');
