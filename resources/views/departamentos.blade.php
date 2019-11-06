@@ -53,7 +53,7 @@
                     </table>
                     <div class="ui mini test modal transition hidden eliminar">
                         <div class="header">¿Esta Seguro?</div>
-                        <div class="content"><p>Los Empleados Asociados a este departamento tambien seran Eliminados sin Posibilidad de recuperarlos</p></div>
+                        <div class="content"><p>Los Empleados sociados a este departamento tambien seran eliminados sin posibilidad de recuperarlos</p></div>
                         <div class="actions">
                             <div class="ui negative button">Cancelar</div>
                             <div class="ui positive right labeled icon button">Si<i class="checkmark icon"></i></div>
@@ -66,16 +66,16 @@
                                 @csrf
                                 <div class="field">
                                     <label>Nombre</label>
-                                    <input type="text" name="nombre" placeholder="Nombre de departamento">
+                                    <input type="text" name="nombre" placeholder="Nombre del departamento">
                                 </div>
                                 <div class="field">
                                     <label>Clave</label>
                                     <input type="password" name="clave" placeholder="Crea una Clave">
                                 </div>
-                                <div class="ui yellow message errorValidacion">
-                                    <div class="header">Action Forbidden</div>
-                                    <p>You can only sign up for an account once with a given e-mail address.</p>
-                                </div>
+{{--                                <div class="ui yellow message errorValidacion">--}}
+{{--                                    <div class="header">Action Forbidden</div>--}}
+{{--                                    <p>You can only sign up for an account once with a given e-mail address.</p>--}}
+{{--                                </div>--}}
                                 <div class="actions">
                                     <div class="ui green submit button m-0">Guardar</div>
                                     <div class="ui red deny button ml-1" @click="cancelar">Cancelar</div>
