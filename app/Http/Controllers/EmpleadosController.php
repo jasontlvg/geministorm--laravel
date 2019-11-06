@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Departamento;
@@ -12,6 +13,15 @@ use App\Encuesta;
 class EmpleadosController extends Controller{
     public function index()
     {
+
+        // Checa si existe empresa
+        $empresa= Empresa::first();
+        $canAddEmpleado=true;
+        if(is_null($empresa)){
+            $canAddEmpleado=false;
+        }
+
+
         $empleados= User::all();
         $departamentosExists= true;
         $departamentos= Departamento::select('id','nombre')->get();
@@ -19,7 +29,8 @@ class EmpleadosController extends Controller{
         if($departamentos->isEmpty()){
             $departamentosExists= false;
         }
-        return view('prueba', compact('departamentos', 'empleados', 'departamentosExists'));
+        return view('empleados', compact('departamentos', 'empleados', 'departamentosExists', 'canAddEmpleado'));
+//        return view('editarEmpleados', compact('departamentos', 'empleados', 'departamentosExists'));
     }
 
     public function create()
@@ -30,12 +41,6 @@ class EmpleadosController extends Controller{
 
     public function store(Request $request)
     {
-
-//        return Encuesta::all();
-//        return sizeof(Encuesta::all());
-//        foreach(Encuesta::all() as $encuesta){
-//            return $encuesta;
-//        }
         $this->validate($request, [
             'nombre'=>'required',
             'apaterno'=>'required',
@@ -48,7 +53,6 @@ class EmpleadosController extends Controller{
             'escolaridad'=>'required',
             'departamento'=>'required'
         ]);
-//        return 'Paso Validaciones';
         $e= new User;
         $e->nombre=$request->get('nombre');
         $e->apaterno=$request->get('apaterno');
@@ -83,16 +87,18 @@ class EmpleadosController extends Controller{
      */
     public function show($id)
     {
+//        return 'Hola';
         $empleado= User::find($id);
         $departamentos= Departamento::select('id','nombre')->get();
         return view('verEmpleados', compact('empleado', 'departamentos'));
     }
 
-    public function edit($id)
+    public function edit($id) // Aqui
     {
         $empleado= User::find($id);
         $departamentos= Departamento::select('id','nombre')->get();
-        return view('editarEmpleados',compact('empleado', 'departamentos'));
+        $color= 'red';
+        return view('editarEmpleados',compact('empleado', 'departamentos', 'color'));
     }
 
     public function update(Request $request, $id)

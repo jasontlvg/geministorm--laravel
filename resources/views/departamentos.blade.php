@@ -43,9 +43,9 @@
                                     <td class="table__tbody__tr__td">{{$dep->clave}}</td>
                                     <td class="table__tbody__tr__td table__tbody__tr__td--editContainer">
                                         <a href="{{route('departamentos.edit', $dep)}}">
-                                            <i class="table__tbody__tr__td--editContainer__icon table__tbody__tr__td--editContainer__icon--edit   fas fa-edit"></i>
+                                            <i class="table__tbody__tr__td--editContainer__icon table__tbody__tr__td--editContainer__icon--edit   fas fa-user-edit"></i>
                                         </a>
-                                        <i class="table__tbody__tr__td--editContainer__icon table__tbody__tr__td--editContainer__icon--delete fas fas fa-trash-alt " @click="eliminar({{$dep->id}})"></i>
+                                        <i class="table__tbody__tr__td--editContainer__icon table__tbody__tr__td--editContainer__icon--delete fas fa-user-minus " @click="eliminar({{$dep->id}})"></i>
                                     </td>
                                 </tr>
                             @endforeach
@@ -53,7 +53,7 @@
                     </table>
                     <div class="ui mini test modal transition hidden eliminar">
                         <div class="header">¿Esta Seguro?</div>
-                        <div class="content"><p>Se eliminara el elemento seleccionado permanentemente</p></div>
+                        <div class="content"><p>Los Empleados Asociados a este departamento tambien seran Eliminados sin Posibilidad de recuperarlos</p></div>
                         <div class="actions">
                             <div class="ui negative button">Cancelar</div>
                             <div class="ui positive right labeled icon button">Si<i class="checkmark icon"></i></div>
@@ -83,6 +83,8 @@
                             </form></div>
                     </div>
                 </div>
+            @else
+                <h2>Por favor registre una empresa</h2>
             @endif
         </main>
     </section>

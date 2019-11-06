@@ -10,4 +10,9 @@ class Estado extends Model
     {
         return $this->belongsTo('App\Encuesta');
     }
+
+    public function empleado()
+    {
+        return $this->belongsTo('App\User', 'empleado_id', 'id');
+    }
 }

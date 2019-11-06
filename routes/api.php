@@ -30,4 +30,5 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('api/results/encuesta', 'API\ResultsController@show')->name('results.show'); // El mw que comprueba si el usuario ya contesta la encuesto esta declarado en el Controller
     Route::put('api/results/{result}', 'API\ResultsController@update')->name('results.update'); // El mw que comprueba si el usuario ya contesta la encuesto esta declarado en el Controller
     Route::delete('api/results/{result}', 'API\ResultsController@destroy')->name('results.destroy'); // El mw que comprueba si el usuario ya contesta la encuesto esta declarado en el Controller
+    Route::get('api/reactivar/{departamento}/{encuesta}', 'API\ResultsController@reactivarEncuesta')->name('results.reactivar'); // El mw que comprueba si el usuario ya contesta la encuesto esta declarado en el Controller
 });

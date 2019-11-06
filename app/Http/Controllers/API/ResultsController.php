@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Controllers\API;
-
 use App\Encuesta;
+use App\Estado;
 use App\Respuesta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,17 +21,14 @@ class ResultsController extends Controller
 //        $departamentos= Departamento::all();
         return $departamentos;
     }
-
     public function encuestasDisponibles($id) // Las encuestas disponibles de ese departamento (recuerda que, digamos, para entender mejor, hay un solo empleado de ese departamento, y ese empleado nomas contesto una encuesta, entonces, solo hay resultados para esa encuesta, porque solo ese han contestado, no quiero traer todos las encuestas si no tienen resultados para ese departamento)
     {
         $idDepartamento=$id;
         $encuestasDisponibles=Resultado::whereHas('empleado',function($query) use ($idDepartamento) {
             $query->where('departamento_id',$idDepartamento);
         })->distinct()->select('encuesta_id')->with('encuesta')->get();
-
         return $encuestasDisponibles;
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -43,7 +39,6 @@ class ResultsController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -71,36 +66,26 @@ class ResultsController extends Controller
         $departamento=$request->get('departamento_id');
         $encuesta=$request->get('encuesta_id');
         $pregunta=$request->get('pregunta_id');
-
         $respuestas= Respuesta::all();
 //        return $respuestas;
-
-
         foreach($respuestas as $respuesta){
-
             $resultados= Resultado::whereHas('empleado',function ($query) use ($departamento){
                 $query->where('departamento_id',$departamento);
             })->where('encuesta_id',$encuesta)->where('pregunta_id',$pregunta)->where('respuesta_id',$respuesta->id)->count();
-
             array_push($enviar,$resultados);
-
         }
-
         return $enviar;
-
         $resultados= Resultado::whereHas('empleado',function ($query) use ($departamento){
             $query->where('departamento_id',$departamento);
         })->where('encuesta_id',$encuesta)->where('pregunta_id',$pregunta)->where('respuesta_id',6)->get();
 //        return Resultado::find(1)->empleado;
         return $resultados;
     }
-
     public function preguntasEncuesta($id)
     {
         $preguntas= Encuesta::find($id)->preguntas;
         return $preguntas;
     }
-
     public function respuestas()
     {
         $respuestas= Respuesta::pluck('respuesta');
@@ -117,7 +102,6 @@ class ResultsController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -128,9 +112,7 @@ class ResultsController extends Controller
     {
         //
     }
-
     // 2019
-
 //    public function getData($departamento)
 //    {
 //        $arr=[];
@@ -259,14 +241,12 @@ class ResultsController extends Controller
 //        }
 //        return $arr;
 //    }
-
     public function getData($departamento)
     {
         $count=0;
         $encuestasDisponibles= Resultado::whereHas('empleado',function($query) use ($departamento) {
             $query->where('departamento_id',$departamento);
         })->distinct()->select('encuesta_id')->with('encuesta')->get();
-
         // Solo funciona en php, si tenemos tres encuestas disponibles, y la ultima encuesta tiene id=5
         // pues al buscar $resultados[5], apuntaremos a ese, pero si retornamos $resultados a JS, y los leemos
         // alla, pues como solo tenemos 3 encuestas disponibles (habiendo dejado $resultados[3] y $resultados[4])
@@ -279,7 +259,6 @@ class ResultsController extends Controller
             // Aqui creamos un array, en donde cada elemento representa las respuestas de una encuesta
 //            array_push($preguntasDeEncuestas, $preguntas);
             $preguntasDeEncuestas[$encuesta_id]= $preguntas;
-
             // Aqui creamos nuestro array de $respuestas
             $resultados[$encuesta_id]= []; // Cuanto lo retornemos al JS, el  array volvera a empezar desde el 0, pero mientras este en PHP, el arreglo funcionara como queremos
             $preguntas= Encuesta::find($encuesta_id)->preguntas;
@@ -292,12 +271,10 @@ class ResultsController extends Controller
                 $count++;
             }
         }
-
         // Obteniendo las respuestas de todas las Encuestas Disponiles del Departamento Seleccionado
         $resultadosEncuestas= Resultado::whereHas('empleado',function ($query) use ($departamento){
             $query->where('departamento_id',$departamento);
         })->get();
-
         foreach ($resultadosEncuestas as $resultado){
             $encuestaId= $resultado->encuesta_id;
             $preguntaId= $resultado->pregunta_id;
@@ -315,9 +292,7 @@ class ResultsController extends Controller
             $num= $num+1;
             $resultados[$encuestaId][$sm][$respuestaId-1]=$num; // Aqui si o si modificamos el array de los resultados directamento
         }
-
         $promediosPorPregunta=[];
-
         foreach($encuestasDisponibles as $encuesta){
             $idEncuesta= $encuesta->encuesta_id;
             $resultadosDeEncuesta= $resultados[$idEncuesta];
@@ -327,7 +302,6 @@ class ResultsController extends Controller
 //                return sizeof($resultadosDePregunta);
                 $sum=0;
                 $sumTotal=0;
-
                 for($i=0; $i<sizeof($resultadosDePregunta); $i++){
                     $sumTotal= $sumTotal+$resultadosDePregunta[$i];
                     if($i == 0){
@@ -349,32 +323,42 @@ class ResultsController extends Controller
                         $sum= $sum + ( ($resultadosDePregunta[$i])*(1) );
                     }
                 }
-
 //                array_push($promediosPorPregunta[$idEncuesta], $sum/$sumTotal); // $sum/$sumTotal, falta delimitar los decimales
                 array_push($promediosPorPregunta[$idEncuesta], round($sum/$sumTotal, 4)); // $sum/$sumTotal, falta delimitar los decimales
 //                return $sumTotal;
             }
         }
-
 //        return $promediosPorPregunta;
 //        return $resultados;
-
         $obj=[];
-
-
-
 //        array_push($obj, $encuestasDisponibles);
 //        array_push($obj, $resultados);
 //        array_push($obj, $promediosPorPregunta);
-
         array_push($obj, $encuestasDisponibles);
         array_push($obj, $resultados);
         array_push($obj, $promediosPorPregunta);
-
-
-
-
         return $obj;
     }
 
+    public function reactivarEncuesta($departamento, $encuesta){
+//        return $encuesta;
+
+
+//        $estados= Resultado::whereHas('empleado',function($query) use ($departamento) {
+//            $query->where('departamento_id',$departamento);
+//        })->distinct()->select('encuesta_id')->with('encuesta')->get();
+
+        $estados= Estado::whereHas('empleado', function ($query) use ($departamento){
+            $query->where('departamento_id',$departamento);
+        })->where('encuesta_id', $encuesta)->where('contestado',1)->get();
+//        $ll= empty($estados);
+//        return $ll;
+        foreach ($estados as $estado) {
+            $estado->contestado=0;
+            $estado->save();
+//            return $estado;
+        }
+        return 1;
+
+    }
 }

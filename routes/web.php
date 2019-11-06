@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin'], function(){
 
     // CRUD
     Route::resource('empresa', 'EmpresaController')->middleware('auth:admin');
+    Route::get('empresa/destruir/{id}', 'EmpresaController@destruir')->name('empresa.destruir')->middleware('auth:admin');
 
     Route::resource('departamentos', 'DepartamentosController')->middleware('auth:admin');
     Route::get('departamentos/destruir/{id}', 'DepartamentosController@destroy')->name('admin.departamento.destruir')->middleware('auth:admin');
@@ -62,7 +63,7 @@ Route::group(['prefix' => 'admin'], function(){
 
 //    Route::get('resultados', 'ResultadosController@select')->middleware('auth:admin');
 //    Route::get('resultados/{departamento}', 'ResultadosController@show')->middleware('auth:admin')->name('resultados');
-    Route::get('resultados', 'ResultadosController@index')->name('resultados.index');
+    Route::get('resultados', 'ResultadosController@index')->name('resultados.index')->middleware('auth:admin');
 
 });
 

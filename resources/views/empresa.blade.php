@@ -1,101 +1,98 @@
-@extends('layouts.admin')
-@section('css-link')
-    <link rel="stylesheet" href="{{asset('css/empresas.css')}}">
-@endsection
-@section('content')
-{{--    {{$canAddEmpresa}}--}}
-    <div class="crudContainer">
-        <div class="crudContainer__header">
-            <h2 class="crudContainer__header__title">Gestion de Empresa</h2>
-            @if($canAddEmpresa)
-                <button class="btn btn-primary crudContainer__header__button" type="button" id="calabaza"><span>Agregar Empresa</span><i
-                        class="crudContainer__header__button__icon fas fa-user-plus"></i>
-                </button>
-            @endif
-        </div>
-        <div class="crudContainer__body">
-            <div class="cajas">
-                <table class="table">
-                    <thead class="table__thead thead-dark">
-                    <tr class="table__thead__row">
-                        <th class="table__thead__row__col" scope="col">Nombre</th>
-                        <th class="table__thead__row__col" scope="col">Giro</th>
-                        <th class="table__thead__row__col" scope="col">Proceso</th>
-                        <th class="table__thead__row__col" scope="col">Editar</th>
-                    </tr>
-                    </thead>
-                    <tbody class="table__tbody">
-                        @if(!$empresa->isEmpty())
-                            <tr class="table__tbody__row">
-                                <td class="table__tbody__row__col">{{$empresa[0]->nombre}}</td>
-                                <td class="table__tbody__row__col">{{$empresa[0]->giro}}</td>
-                                <td class="table__tbody__row__col">{{$empresa[0]->proceso}}</td>
-                                <td class="table__tbody__row__col table__tbody__row__col--mas">
-                                    <a class="table__tbody__row__col__a table__tbody__row__col--mas__a table__tbody__row__col--mas__a--edit" href="{{route('empresa.edit',$empresa[0]->id)}}"><i class="fas fa-edit"></i></a>
-                                    <div class="table__tbody__row__col__a table__tbody__row__col--mas__a table__tbody__row__col--mas__a--trash" href="#">
-                                        <form action="{{route('empresa.destroy', $empresa[0]->id)}}" method="POST" id="form-trash">
-                                            @csrf
-                                            {{method_field('DELETE')}}
-                                            <button type="submit" id="submit-button-destroy">
-                                                <i class="fas fa-trash-alt" id="form-trash-button"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endif
-
-
-                    </tbody>
-                </table>
-            </div><!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Agregar Empresa</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{route('empresa.store')}}" id="form" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input class="input form-control" name="nombre" type="text" id="exampleInputPassword1" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <label>Giro</label>
-                                    <input class="input form-control" name="giro" type="text" id="exampleInputPassword1" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <label>Proceso</label>
-                                    <select class="input custom-select" name="proceso">
-                                        <option value="Microempresa">Microempresa</option>
-                                        <option value="Mediana Empresa">Mediana Empresa</option>
-                                        <option value="Pequeña Empresa">Pequeña Empresa</option>
-                                        <option value="Grande Empresa">Grande Empresa</option>
-                                    </select>
-                                </div>
-
-
-
-                                <button type="submit" class="btn btn-primary agregar">Agregar</button>
-                                <button type="button" class="btn btn-secondary cancelar" data-dismiss="modal" id="cancelar">Cancelar
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title><meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="/css/empresa.css" rel="stylesheet"></head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+<body>
+<div class="wrapper">
+    <aside class="aside" id="aside">
+        <div class="aside__logo"><i class="fas fa-bars aside__logo__burguer" id="burguer"></i>
+            <div class="aside__logo__container"><i class="fas fa-poo-storm aside__logo__container__logo"></i>
+                <h1 class="aside__logo__container__title">GEMINI</h1>
             </div>
         </div>
-    </div>
+        @component('components.links')@endcomponent
+    </aside>
+    <div class="aside-overlay" id="aside-overlay"></div>
+    <section class="section" id="section">
+        <header class="header">
+            <h2 class="header__title">Empresa</h2>
+        </header>
+        <main class="main" id="main">
+            @if($canAddEmpresa)
 
-@endsection
+                <div class="contaninerForRegisterCompany">
+                    <div class="imgContainer"><img src="/img/enterprise.png" alt=""></div>
+                    <div class="formContainer">
+                        <form class="ui form formPrime" action="{{route('empresa.store')}}" id="form" method="POST">
+                            @csrf
+                            <h2>Por favor registre los datos de la empresa</h2>
+                            <div class="field">
+                                <label>Nombre</label>
+                                <input type="text" name="nombre" placeholder="Ingrese el Nombre de la Empresa">
+                            </div>
+                            <div class="field">
+                                <label>Giro</label>
+                                <input type="text" name="giro" placeholder="Last Name">
+                            </div>
+                            <div class="field">
+                                <label>Proceso</label>
+                                <select class="ui search dropdown" name="proceso">
+                                    <option value="" >Seleccione un Proceso</option>
+                                    <option value="Microempresa">Microempresa</option>
+                                    <option value="Mediana Empresa">Mediana Empresa</option>
+                                    <option value="Pequeña Empresa">Pequeña Empresa</option>
+                                    <option value="Grande Empresa">Grande Empresa</option>
+                                </select>
+                            </div>
+                            <button class="ui button" type="submit">Guardar</button>
+                        </form>
+                    </div>
+                </div>
 
-@section('js-link')
-    <script type="text/javascript" src="{{asset('js/empresas.js')}}"></script>
-@endsection
+            @else
 
+                <div class="contaninerForRegistedCompany">
+                    <div class="imgContainer"><img src="/img/enterprise.png" alt=""></div>
+                    <div class="formContainer"><form class="ui form formPrime">
+                            <h2>Datos de la empresa</h2><div class="field ready">
+                                <label>Nombre</label>
+                                <h2 class="sub">{{$empresa[0]->nombre}}</h2></div>
+                            <div class="field ready">
+                                <label>Giro</label>
+                                <h2 class="sub">{{$empresa[0]->giro}}</h2></div>
+                            <div class="field ready">
+                                <label>Proceso</label>
+                                <h2 class="sub">{{$empresa[0]->proceso}}</h2></div>
+                            <div class="ui buttons">
+                                <a href="{{route('empresa.edit',$empresa[0]->id)}}">
+                                    <div class="ui button editar">Editar</div>
+                                </a>
+                                <div class="or" data-text="o"></div>
+                                <a href="{{route('empresa.destruir',$empresa[0]->id)}}">
+                                    <div class="ui button eliminar">Eliminar</div>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            @endif
+
+
+
+
+
+
+
+        </main>
+    </section>
+</div>
+{{--<script type="text/javascript" src="/js/empresa.js"></script>--}}
+<script type="text/javascript" src="{{asset('js/empresa.js')}}"></script>
+</body>
+</html>

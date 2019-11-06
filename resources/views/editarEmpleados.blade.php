@@ -1,196 +1,207 @@
-@extends('layouts.admin')
-@section('css-link')
-    <link href="{{asset('css/editarEmpleados.css')}}" rel="stylesheet">
-@endsection
-@section('content')
-    <div class="crudContainer">
-        <div class="crudContainer__body"><!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content" id="formContainer">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar Empleado</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="tlx">
-                            <form action="{{route('empleados.update', $empleado->id)}}" method="POST">
-                                @csrf
-                                {{method_field('PUT')}}
-                                {{--  ----------------------------------------------SEPARADOR----------------------------------------------                 --}}
-                                <div class="form-group form-group--datos">
-                                    <label class="form-group__label">Datos</label>
-                                    <div class="form-group__inputContainer">
-                                        <input class="form-group__inputContainer__input form-control" type="text" placeholder="Nombre/s" name="nombre" value="{{$empleado->nombre}}">
-                                        @if($errors->has('nombre'))
-                                            <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                                <strong>{{$errors->first('nombre')}}</strong>
-                                                <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        @else
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title><meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="/css/editarEmpleados.css" rel="stylesheet"></head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<body>
+<div class="wrapper">
+    <aside class="aside" id="aside">
+        <div class="aside__logo"><i class="fas fa-bars aside__logo__burguer" id="burguer"></i>
+            <div class="aside__logo__container"><i class="fas fa-poo-storm aside__logo__container__logo"></i>
+                <h1 class="aside__logo__container__title">GEMINI</h1>
+            </div>
+        </div>
+        @component('components.links')@endcomponent
+    </aside>
+    <div class="aside-overlay" id="aside-overlay"></div>
+    <section class="section" id="section">
+        <header class="header">
+        </header>
+        <main class="main" id="main">
+            <div class="main__headerCrud"></div>
+            <div class="main__results" id="app">
+                <div class="ui modal agregar tiny">
+                    <div class="header">Editar Empleado</div>
+                    <div class="image content">
+                        <form class="ui form" action="{{route('empleados.update', $empleado->id)}}" method="POST">
+                            @csrf
+                            {{method_field('PUT')}}
+                            <div class="field">
+                                <label>Nombre Completo</label>
+                                <div class="two fields">
+                                    <div class="field">
+                                        <input type="text" name="nombre" placeholder="Nombre/s" class="inputToClean" value="{{$empleado->nombre}}">
+                                    </div>
 
-                                        @endif
-                                        <input class="form-group__inputContainer__input form-control"
-                                               type="text" placeholder="A. Paterno" name="apaterno" value="{{$empleado->apaterno}}">
-                                        @if($errors->has('apaterno'))
-                                            <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                                <strong>{{$errors->first('apaterno')}}</strong>
-                                                <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        @endif
-                                        <input class="form-group__inputContainer__input form-control"
-                                               type="text" placeholder="A. Materno" name="amaterno" value="{{$empleado->amaterno}}">
-                                        @if($errors->has('amaterno'))
-                                            <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                                <strong>{{$errors->first('amaterno')}}</strong>
-                                                <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        @endif
+                                    <div class="field">
+                                        <input type="text" name="apaterno" placeholder="A. Paterno" class="inputToClean" value="{{$empleado->apaterno}}">
+                                    </div>
+
+                                    <div class="field">
+                                        <input type="text" name="amaterno" placeholder="A. Materno" class="inputToClean" value="{{$empleado->amaterno}}">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Edad</label>
-                                    <input class="input form-control" type="number" min="18" max="90"
-                                           name="edad" value="{{$empleado->edad}}">
-                                    @if($errors->has('edad'))
-                                        <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                            <strong>{{$errors->first('edad')}}</strong>
-                                            <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    @endif
+                            </div>
+                            @if($errors->has('nombre'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Nombre Erroneo</div>
+                                    <p>Apellido Paterno Erroneo</p>
                                 </div>
-                                <div class="form-group">
-                                    <label>Sexo</label>
-                                    <select class="input custom-select" name="sexo" id="lala" selected="{{$empleado->sexo}}">
-                                        <option>Masculino</option>
-                                        <option>Femenino</option>
-                                        <option value="{{$empleado->sexo}}" selected hidden>{{$empleado->sexo}}</option>
-                                    </select>
-                                    @if($errors->has('sexo'))
-                                        <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                            <strong>{{$errors->first('sexo')}}</strong>
-                                            <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    @endif
+                            @endif
+                            @if($errors->has('apaterno'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Apellido Paterno</div>
+                                    <p>Apellido Paterno Erroneo</p>
                                 </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input class="input form-control" name="email" type="email"
-                                           id="exampleInputPassword1" placeholder="" value="{{$empleado->email}}">
-                                    @if($errors->has('email'))
-                                        <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                            <strong>{{$errors->first('email')}}</strong>
-                                            <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    @endif
+                            @endif
+                            @if($errors->has('amaterno'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Apellido Materno</div>
+                                    <p>Apellido Materno Erroneo</p>
                                 </div>
-                                <div class="form-group">
-                                    <label>Cargo</label>
-                                    <select class="input custom-select" name="cargo">
-                                        @component('components.cargosEmpleados')@endcomponent
-                                        <option value="{{$empleado->cargo}}" selected hidden>{{$empleado->cargo}}</option>
-                                    </select>
-                                    @if($errors->has('cargo'))
-                                        <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                            <strong>{{$errors->first('cargo')}}</strong>
-                                            <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <label>Jornada</label>
-                                    <select class="input custom-select" name="jornada">
-                                        <option>Diurna</option>
-                                        <option>Nocturna</option>
-                                        <option>Mixta</option>
-                                        <option value="{{$empleado->jornada}}" selected hidden>{{$empleado->jornada}}</option>
-                                    </select>
-                                    @if($errors->has('jornada'))
-                                        <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                            <strong>{{$errors->first('jornada')}}</strong>
-                                            <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <label>Escolaridad</label>
-                                    <select class="input custom-select" name="escolaridad">
-                                        <option>Primaria</option>
-                                        <option>Secundaria</option>
-                                        <option>Preparatoria</option>
-                                        <option>Técnica</option>
-                                        <option>Universidad</option>
-                                        <option>Especialización</option>
-                                        <option>Doctorado</option>
-                                        <option>Maestría</option>
-                                        <option value="{{$empleado->escolaridad}}" selected hidden>{{$empleado->escolaridad}}</option>
-                                    </select>
-                                    @if($errors->has('escolaridad'))
-                                        <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                            <strong>{{$errors->first('escolaridad')}}</strong>
-                                            <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <label>Departamento</label>
-                                    <select class="input custom-select" name="departamento">
-                                        @foreach($departamentos as $d)
-                                            <option value="{{$d->id}}">{{$d->nombre}}</option>
-                                        @endforeach
-                                        <option value="{{$empleado->departamento->id}}" selected hidden>{{$empleado->departamento->nombre}}</option>
-                                    </select>
-                                    @if($errors->has('departamento'))
-                                        <div class="alert alert-warning alert-dismissible fade show alert-danger p-2 px-3 align-items-center" role="alert">
-                                            <strong>{{$errors->first('departamento')}}</strong>
-                                            <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    @endif
-                                </div>
-                                {{--  ----------------------------------------------SEPARADOR----------------------------------------------                 --}}
-                                <button type="submit" class="btn btn-primary agregar">Guardar</button>
-                                <a class="btn btn-secondary cancelar" href="{{route('empleados.index')}}" id="regresarBoton">Regresar</a>
-                            </form>
+                            @endif
 
-                        </div>
+                            <div class="field">
+                                <label>Edad</label>
+                                <input type="number" placeholder="Coloca la Edad" name="edad" class="inputToClean" value="{{$empleado->edad}}">
+                            </div>
+                            @if($errors->has('edad'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Edad Erroneo</div>
+                                    <p>Error en la Edad</p>
+                                </div>
+                            @endif
+
+
+                            <div class="field">
+                                <label>Sexo</label>
+                                <select class="ui search dropdown selectToClear" name="sexo">
+                                    <option value="{{$empleado->sexo}}">Selecciona de Sexo</option>
+                                    <option value="AF">Masculino</option>
+                                    <option value="AX">Femenino</option>
+                                </select>
+                            </div>
+                            @if($errors->has('sexo'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Sexo Erroneo</div>
+                                    <p>Error en Sexo</p>
+                                </div>
+                            @endif
+
+                            <div class="field">
+                                <label>Email</label>
+                                <input type="email" name="email" placeholder="Ingresa un Email" class="inputToClean" value="{{$empleado->email}}">
+                            </div>
+                            @if($errors->has('email'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Email Erroneo</div>
+                                    <p>Email Erroneo</p>
+                                </div>
+                            @endif
+
+
+                            <div class="field">
+                                <label>Cargo</label>
+                                <select class="ui search dropdown selectToClear" name="cargo">
+                                    <option value="{{$empleado->cargo}}">Selecciona un Cargo</option>
+                                    @component('components.cargosEmpleados')@endcomponent
+                                </select>
+                            </div>
+                            @if($errors->has('cargo'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Cargo Erroneo</div>
+                                    <p>Cargo Erroneo</p>
+                                </div>
+                            @endif
+
+                            <div class="field">
+                                <label>Jornada</label>
+                                <select class="ui search dropdown selectToClear" name="jornada">
+                                    <option value="{{$empleado->jornada}}">Selecciona una Jornada</option>
+                                    <option>Diurna</option>
+                                    <option>Nocturna</option>
+                                    <option>Mixta</option>
+                                </select>
+                            </div>
+                            @if($errors->has('jornada'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Jornada Erroneo</div>
+                                    <p>Jornada Erroneo</p>
+                                </div>
+                            @endif
+
+
+
+                            <div class="field">
+                                <label>Escolaridad</label>
+                                <select class="ui search dropdown selectToClear" name="escolaridad">
+                                    <option value="{{$empleado->escolaridad}}">Selecciona una Escolaridad</option>
+                                    <option>Primaria</option>
+                                    <option>Secundaria</option>
+                                    <option>Preparatoria</option>
+                                    <option>Técnica</option>
+                                    <option>Universidad</option>
+                                    <option>Especialización</option>
+                                    <option>Doctorado</option>
+                                    <option>Maestría</option>
+                                </select>
+                            </div>
+                            @if($errors->has('escolaridad'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Escolaridad Erroneo</div>
+                                    <p>Escolaridad Erroneo</p>
+                                </div>
+                            @endif
+
+                            <div class="field">
+                                <label>Departamento</label>
+                                <select class="ui search dropdown selectToClear" name="departamento">
+                                    @foreach($departamentos as $dep)
+                                        <option value="{{$dep->id}}">{{$dep->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @if($errors->has('departamento'))
+                                <div class="ui message {{$color}} errorValidacion">
+                                    <i class="close icon"></i>
+                                    <div class="header">Departamento Erroneo</div>
+                                    <p>DepartamentoErroneo</p>
+                                </div>
+                            @endif
+
+
+{{--                            <div class="ui yellow message errorValidacion">--}}
+{{--                                <div class="header">Action Forbidden</div>--}}
+{{--                                <p>You can only sign up for an account once with a given e-mail address.</p>--}}
+{{--                            </div>--}}
+
+                            <div class="actions">
+                                <div class="ui green submit button m-0">Submit</div>
+                                <a href="{{route('empleados.index')}}" class="ui red button ml-1">Cancelar</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </main>
+    </section>
+</div>
+<script type="text/javascript" src="/js/editarEmpleados.js"></script>
+<script>
 
-@endsection
-
-@section('js-link')
-    <script type="text/javascript" src="{{asset('js/editarEmpleados.js')}}"></script>
-@endsection
-
-
-
-
-
-
-
-
+</script>
+</body>
+</html>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Departamento;
 use App\Empresa;
+use Illuminate\Support\Facades\Hash;
 
 class DepartamentosController extends Controller
 {
@@ -57,7 +59,7 @@ class DepartamentosController extends Controller
             return redirect(route('departamentos.index'));
 
         }else{
-            return 'Errororororor';
+            return 'Error';
         }
     }
 
@@ -102,6 +104,16 @@ class DepartamentosController extends Controller
         $uD->nombre= $request->nombre;
         $uD->clave= $request->clave;
         $uD->save();
+
+        // Agregado el $empleados y el foreach, borralo para estar como antes
+        $empleados= User::where('departamento_id',$id)->get();
+        foreach ($empleados as $empleado){
+            $empleado->password= Hash::make($request->clave);
+            $empleado->save();
+        }
+
+//        return $empleados;
+
         return redirect(route('departamentos.index'));
     }
 
@@ -116,7 +128,6 @@ class DepartamentosController extends Controller
         $dep= Departamento::where('id', $id)->delete();
         $deps= Departamento::all();
         $depEliminado= true;
-//        return view('departamentos', compact('depEliminado', 'deps'));
         return redirect(route('departamentos.index'));
     }
 }

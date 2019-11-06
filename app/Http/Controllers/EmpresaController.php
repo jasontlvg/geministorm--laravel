@@ -102,4 +102,10 @@ class EmpresaController extends Controller
         $e= Empresa::destroy($id);
         return redirect(route('empresa.index'));
     }
+
+    public function destruir($id)
+    {
+        $e= Empresa::destroy($id);
+        return redirect(route('empresa.index'));
+    }
 }
