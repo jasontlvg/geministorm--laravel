@@ -9,10 +9,12 @@
 <body>
 <div class="wrapper">
     <aside class="aside" id="aside">
-        <div class="aside__logo"><i class="fas fa-bars aside__logo__burguer" id="burguer"></i>
-            <div class="aside__logo__container"><i class="fas fa-poo-storm aside__logo__container__logo"></i>
+        <div class="aside__logo">
+            <i class="fas fa-bars aside__logo__burguer" id="burguer"></i>
+            <a href="/"  class="aside__logo__container">
+                <i class="fas fa-poo-storm aside__logo__container__logo"></i>
                 <h1 class="aside__logo__container__title">GEMINI</h1>
-            </div>
+            </a>
         </div>
         @component('components.links')@endcomponent
     </aside>

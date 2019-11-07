@@ -11,9 +11,10 @@
 <div class="wrapper">
     <aside class="aside" id="aside">
         <div class="aside__logo"><i class="fas fa-bars aside__logo__burguer" id="burguer"></i>
-            <div class="aside__logo__container"><i class="fas fa-poo-storm aside__logo__container__logo"></i>
+            <a href="/" class="aside__logo__container">
+                <i class="fas fa-poo-storm aside__logo__container__logo"></i>
                 <h1 class="aside__logo__container__title">GEMINI</h1>
-            </div>
+            </a>
         </div>
         @component('components.links')@endcomponent
     </aside>
@@ -52,8 +53,8 @@
                         </tbody>
                     </table>
                     <div class="ui mini test modal transition hidden eliminar">
-                        <div class="header">¿Esta Seguro?</div>
-                        <div class="content"><p>Los Empleados sociados a este departamento tambien seran eliminados sin posibilidad de recuperarlos</p></div>
+                        <div class="header">¿Esta seguro?</div>
+                        <div class="content"><p>Los empleados asociados a este departamento tambien seran eliminados sin posibilidad de recuperarlos</p></div>
                         <div class="actions">
                             <div class="ui negative button">Cancelar</div>
                             <div class="ui positive right labeled icon button">Si<i class="checkmark icon"></i></div>

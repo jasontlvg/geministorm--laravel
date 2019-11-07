@@ -27,11 +27,22 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="/img/elliot.jpg" alt="">
+{{--                        {{$encuesta->encuesta->id}}--}}
+                        @if($encuesta->encuesta->id == 1)
+                            <img src="/img/personas.jpg" alt="">
+                        @elseif($encuesta->encuesta->id == 2)
+                            <img src="/img/producto.jpg" alt="">
+                        @elseif($encuesta->encuesta->id == 3)
+                            <img src="/img/act.jpg" alt="">
+                        @elseif($encuesta->encuesta->id == 4)
+                            <img src="/img/procesos.jpg" alt="">
+                        @else
+                            <img src="/img/practica.jpg" alt="">
+                        @endif
                     </div>
                     <div class="content"><a class="header" href="{{route('encuesta.show',$encuesta->encuesta->id)}}">{{$encuesta->encuesta->nombre}}</a>
                         <div class="meta">
-                            <div class="date">Created in Sep 2014</div>
+{{--                            <div class="date">Created in Sep 2014</div>--}}
                         </div>
 {{--                        <div class="description">Encuesta sobre las Personas del ambiente laboral</div>--}}
                     </div>

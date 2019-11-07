@@ -189,7 +189,7 @@
 {{--                            </div>--}}
 
                             <div class="actions">
-                                <div class="ui green submit button m-0">Submit</div>
+                                <div class="ui green submit button m-0">Guardar</div>
                                 <a href="{{route('empleados.index')}}" class="ui red button ml-1">Cancelar</a>
                             </div>
                         </form>
