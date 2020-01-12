@@ -13,8 +13,11 @@ use App\Encuesta;
 use App\Respuesta;
 use App\Classes\Objeto;
 use App\Classes\EncuestaObj;
+use App\Indicador;
 use App\Classes\PreguntaObj;
 use function foo\func;
+
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ResultadosController extends Controller
 {
@@ -97,5 +100,39 @@ class ResultadosController extends Controller
         return view('resultados',compact('departamentos','idDepartamento'));
 
 
+    }
+
+
+    public function reporte(Request $request)
+    {
+        $promedios= $request->input('pi');
+        $encuesta_id= $request->get('encuesta_id');
+
+        $departamento= $request->get('departamento');
+        $encuesta= $request->get('encuesta');
+        $media_encuesta= $request->get('media');
+
+        $indicadores= Indicador::where('encuesta_id', $encuesta_id)->get();
+        $preguntas= Encuesta::find($encuesta_id)->preguntas;
+
+        $f= [];
+
+        for($i= 0; $i<sizeof($promedios); $i++){
+
+            if($promedios[$i] <= 3){
+                $obj= new PreguntaObj();
+
+                $obj->pregunta= $preguntas[$i];
+                $obj->indicador= $indicadores[$i];
+                $obj->media= $promedios[$i];
+
+                array_push($f, $obj);
+            }
+        }
+
+//        return $f;
+//        return view('descargar', compact( 'departamento', 'encuesta', 'media_encuesta', 'f'));
+        $pdf= PDF::loadView('descargar', compact( 'departamento', 'encuesta', 'media_encuesta', 'f'));
+        return $pdf->download('reporte.pdf');
     }
 }

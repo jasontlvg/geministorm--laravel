@@ -6,6 +6,7 @@ namespace App\Classes;
 
 class PreguntaObj
 {
-    var $question='';
-    var $results=[];
+    var $pregunta='';
+    var $indicador='';
+    var $media=0;
 }

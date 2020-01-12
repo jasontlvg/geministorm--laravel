@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Departamento;
 use App\Resultado;
 use App\User;
+use App\Indicador;
 class ResultsController extends Controller
 {
     /**
@@ -84,6 +85,9 @@ class ResultsController extends Controller
     public function preguntasEncuesta($id)
     {
         $preguntas= Encuesta::find($id)->preguntas;
+
+
+
         return $preguntas;
     }
     public function respuestas()
@@ -112,135 +116,6 @@ class ResultsController extends Controller
     {
         //
     }
-    // 2019
-//    public function getData($departamento)
-//    {
-//        $arr=[];
-//        $resPreguntas=[];
-//        $encuestaResultados=[];
-//        // Opcion 1
-//        $resultados= Resultado::whereHas('empleado',function ($query) use ($departamento){
-//            $query->where('departamento_id',$departamento);
-//        })->get();
-////        return $resultados;
-//
-//
-//        // Opcion 2
-//        $encuestasDisponibles=Resultado::whereHas('empleado',function($query) use ($departamento) {
-//            $query->where('departamento_id',$departamento);
-//        })->distinct()->select('encuesta_id')->with('encuesta')->get();
-//
-//
-//
-//        $encuestas= $encuestasDisponibles;
-////        return $encuestas;
-////        $encuestas= Encuesta::all();
-//        $respuestas= Respuesta::all();
-//        $resultadosXencuesta= [];
-////        return $encuestas;
-//
-//        foreach ($encuestas as $encuesta){
-//            $resultados= Resultado::whereHas('empleado',function ($query) use ($departamento,$encuesta){
-//                $query->where('departamento_id',$departamento)->where('encuesta_id', $encuesta->encuesta_id);
-//            })->get();
-//            array_push($resultadosXencuesta, $resultados);
-//        }
-////        return $resultadosXencuesta;
-//
-//        $resultadosDeLasPreguntasPorEncuesta=[];
-//        $l=[];
-//        foreach($resultadosXencuesta as $resultadosEncuesta){
-//            // Despues de dividir los resultados
-//            // por encuesta, seleccionamos los resultados de una encuesta nadamas
-//            // $resultadosEncuesta, es una lista con todas las respuestas
-//            $encuesta_id= $resultadosEncuesta[0]->encuesta_id;
-//
-//
-//            $preguntas= Encuesta::find($encuesta_id)->preguntas;
-//
-//
-////            if($resultadosEncuesta[0]->encuesta_id == 2){
-//////                Si vamos en la segunda encuesta, esto lo retorn
-////            }
-//
-//
-////            return $preguntas;
-////            $l=[]; // Una $l representa los resultados de una sola pregunta de una Encuesta
-//            $PRUEBA=0;
-//            foreach ($preguntas as $pregunta){
-//                // Checado, $pregunta, su numero de ciclos es igual al numero de pregunta de la encuesta, para la segunda iteracion es 14
-//                $PRUEBA++;
-//                $preguntaId= $pregunta->id;
-////                return $pregunta->pregunta;
-//                $personasQueContestaron1=0;
-//                $personasQueContestaron2=0;
-//                $personasQueContestaron3=0;
-//                $personasQueContestaron4=0;
-//                $personasQueContestaron5=0;
-//                $personasQueContestaron6=0;
-//                foreach ($resultadosEncuesta as $resultado){
-////                    return $resultado;
-//                    if($resultado->pregunta_id == $preguntaId){
-//
-//                        if($resultado->respuesta_id == 1){
-//                            $personasQueContestaron1++;
-//                        }
-//
-//                        if($resultado->respuesta_id == 2){
-//                            $personasQueContestaron2++;
-//                        }
-//
-//                        if($resultado->respuesta_id == 3){
-//                            $personasQueContestaron3++;
-//                        }
-//
-//
-//                        if($resultado->respuesta_id == 4){
-//                            $personasQueContestaron4++;
-//                        }
-//
-//
-//                        if($resultado->respuesta_id == 5){
-//                            $personasQueContestaron5++;
-//                        }
-//
-//
-//                        if($resultado->respuesta_id == 6){
-//                            $personasQueContestaron6++;
-//                        }
-//
-//                    }
-//
-//                }
-//
-//                array_push($l, $personasQueContestaron1);
-//                array_push($l, $personasQueContestaron2);
-//                array_push($l, $personasQueContestaron3);
-//                array_push($l, $personasQueContestaron4);
-//                array_push($l, $personasQueContestaron5);
-//                array_push($l, $personasQueContestaron6);
-//                array_push($arr,$l);
-////                $l=[];
-//
-////                array_push($l, $personasQueContestaron1);
-////                array_push($l, $personasQueContestaron2);
-////                array_push($l, $personasQueContestaron3);
-////                array_push($l, $personasQueContestaron4);
-////                array_push($l, $personasQueContestaron5);
-////                array_push($l, $personasQueContestaron6);
-////                array_push($resPreguntas,$l); // Problema aqui, en
-////                $l=[];
-//
-//            }
-//
-//            if($resultadosEncuesta[0]->encuesta_id == 2){
-////                return $resPreguntas;
-//            }
-//
-////            array_push($arr,$resPreguntas);
-//        }
-//        return $arr;
-//    }
     public function getData($departamento)
     {
         $count=0;
@@ -361,4 +236,12 @@ class ResultsController extends Controller
         return 1;
 
     }
+
+    public function getIndicador($encuestaId)
+    {
+        $indicadores= Indicador::where('encuesta_id', $encuestaId)->get();
+        return $indicadores;
+    }
+
+
 }

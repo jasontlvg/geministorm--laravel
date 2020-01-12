@@ -1,0 +1,21 @@
+.contenedor {
+  width: 100vw !important;
+}
+
+.columna {
+  margin-right: 1em;
+  display: inline-block;
+}
+
+.columna .titulo {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.columna .descripcion {
+  margin: 0;
+  color: #157786;
+  font-size: 1.3em;
+}
+

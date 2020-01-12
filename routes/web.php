@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 
 Route::get('lolo', function () {
-    return view('prueba');
+    return view('descargar');
 });
 
 
@@ -64,6 +64,9 @@ Route::group(['prefix' => 'admin'], function(){
 //    Route::get('resultados', 'ResultadosController@select')->middleware('auth:admin');
 //    Route::get('resultados/{departamento}', 'ResultadosController@show')->middleware('auth:admin')->name('resultados');
     Route::get('resultados', 'ResultadosController@index')->name('resultados.index')->middleware('auth:admin');
+
+    Route::get('resultados/reporte', 'ResultadosController@reporte')->name('resultados.reporte')->middleware('auth:admin');
+
 
 });
 
