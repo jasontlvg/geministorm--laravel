@@ -52,7 +52,7 @@
                 @foreach($f as $indicador)
                     <tr>
                         <th scope="row">{{$indicador->pregunta->nombre}}.</th>
-                        <td>{{$indicador->indicador->indicador}}</td>
+                        <td>{{$indicador->indicador->indicador}}.</td>
                         <td>{{$indicador->media}}</td>
                     </tr>
                 @endforeach
