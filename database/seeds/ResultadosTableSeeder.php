@@ -29,7 +29,7 @@ class ResultadosTableSeeder extends Seeder
                         $resultado->save();
                     }
                 }elseif($encuesta==2){
-                    for($p=18;$p<=31;$p++){
+                    for($p=18;$p<=24;$p++){
                         $rFactory= factory(App\Resultado::class)->make();
                         $resultado=new Resultado;
                         $resultado->encuesta_id=$encuesta;
@@ -39,7 +39,7 @@ class ResultadosTableSeeder extends Seeder
                         $resultado->save();
                     }
                 }elseif($encuesta==3){
-                    for($p=32;$p<=39;$p++){
+                    for($p=25;$p<=32;$p++){
                         $rFactory= factory(App\Resultado::class)->make();
                         $resultado=new Resultado;
                         $resultado->encuesta_id=$encuesta;
@@ -49,7 +49,7 @@ class ResultadosTableSeeder extends Seeder
                         $resultado->save();
                     }
                 }elseif($encuesta==4){
-                    for($p=40;$p<=65;$p++){
+                    for($p=33;$p<=58;$p++){
                         $rFactory= factory(App\Resultado::class)->make();
                         $resultado=new Resultado;
                         $resultado->encuesta_id=$encuesta;
@@ -59,7 +59,7 @@ class ResultadosTableSeeder extends Seeder
                         $resultado->save();
                     }
                 }elseif($encuesta==5){
-                    for($p=66;$p<=86;$p++){
+                    for($p=59;$p<=79;$p++){
                         $rFactory= factory(App\Resultado::class)->make();
                         $resultado=new Resultado;
                         $resultado->encuesta_id=$encuesta;

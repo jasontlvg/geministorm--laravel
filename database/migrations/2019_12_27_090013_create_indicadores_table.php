@@ -15,7 +15,7 @@ class CreateIndicadoresTable extends Migration
     {
         Schema::create('indicadores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('indicador');
+            $table->longText('indicador');
             $table->unsignedBigInteger('encuesta_id');
             $table->foreign('encuesta_id')->references('id')->on('encuestas')->onDelete('cascade');
             $table->timestamps();

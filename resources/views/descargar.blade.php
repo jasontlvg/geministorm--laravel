@@ -10,28 +10,15 @@
     <link href="{{ asset('css/descargar.css') }}" rel="stylesheet">
 </head>
 <body>
+{{--    <h1></h1>--}}
 
+    <div class="contenedor contenedor--titulo">
+        <h1>{{$empresa->nombre}}</h1>
+    </div>
 
-{{--    <table class="ui celled table">--}}
-{{--        <thead>--}}
-{{--            <tr>--}}
-{{--                <th>Pregunta</th>--}}
-{{--                <th>Recomendacion</th>--}}
-{{--                <th>Media</th>--}}
-{{--            </tr>--}}
-{{--        </thead>--}}
-{{--        <tbody>--}}
-{{--            @foreach($f as $indicador)--}}
-{{--                <tr>--}}
-{{--                    <td data-label="Name">{{$indicador->pregunta->pregunta}}</td>--}}
-{{--                    <td data-label="Age">{{$indicador->indicador->indicador}}</td>--}}
-{{--                    <td data-label="Job">{{$indicador->media}}</td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-{{--        </tbody>--}}
-{{--    </table>--}}
-
-
+    <div class="contenedor contenedor--acciones">
+        <h2>Acciones</h2>
+    </div>
 
     <div class="contenedor">
         <div class="columna">
@@ -40,7 +27,7 @@
         </div>
 
         <div class="columna">
-            <p class="titulo">Encuesta</p>
+            <p class="titulo">Factor</p>
             <p class="descripcion">{{$encuesta}}</p>
         </div>
 
@@ -56,15 +43,15 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Pregunta</th>
-                    <th scope="col">Recomendacion</th>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Recomendación</th>
                     <th scope="col">Media</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($f as $indicador)
                     <tr>
-                        <th scope="row">{{$indicador->pregunta->pregunta}}.</th>
+                        <th scope="row">{{$indicador->pregunta->nombre}}.</th>
                         <td>{{$indicador->indicador->indicador}}</td>
                         <td>{{$indicador->media}}</td>
                     </tr>
@@ -72,6 +59,13 @@
             </tbody>
         </table>
 
+    </div>
+
+    <div class="conte">
+        <div class="info">
+            <p><strong>Fecha de Solicitud:</strong> {{$date}}</p>
+            <p><strong>Administrador quien solicita reporte:</strong> {{$admin[0]->name}}</p>
+        </div>
     </div>
 
 

@@ -118,6 +118,7 @@ class ResultsController extends Controller
     }
     public function getData($departamento)
     {
+
         $count=0;
         $encuestasDisponibles= Resultado::whereHas('empleado',function($query) use ($departamento) {
             $query->where('departamento_id',$departamento);

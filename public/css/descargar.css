@@ -2,6 +2,15 @@
   width: 100vw !important;
 }
 
+.contenedor--acciones h2 {
+  font-size: 1.5em;
+}
+
+.contenedor--titulo {
+  width: 100%;
+  text-align: center;
+}
+
 .columna {
   margin-right: 1em;
   display: inline-block;

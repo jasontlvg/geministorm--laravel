@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\EncuestaPregunta;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,8 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);
-        $this->call(EstadosTableSeeder::class);
+//        $this->call(UsersTableSeeder::class);
+//        $this->call(EstadosTableSeeder::class);
         $this->call(ResultadosTableSeeder::class);
+
+//        $this->call(EncuestaPreguntaSeeder::class);
     }
 }

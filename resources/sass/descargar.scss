@@ -3,11 +3,20 @@
 //}
 .contenedor{
     width: 100vw !important;
-    //display: flex;
-    //background: red;
-    //flex-wrap: wrap;
-    //flex-direction: column;
+    &--acciones{
+        h2{
+            font-size: 1.5em;
+        }
+    }
+
+    &--titulo{
+        width: 100%;
+        text-align: center;
+
+    }
 }
+
+
 //
 .columna{
     margin-right: 1em;

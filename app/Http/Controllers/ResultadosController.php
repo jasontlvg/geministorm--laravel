@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Admin;
+use Illuminate\Support\Facades\Auth;
+use App\Empresa;
+use App\Variable;
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -114,15 +117,23 @@ class ResultadosController extends Controller
 
         $indicadores= Indicador::where('encuesta_id', $encuesta_id)->get();
         $preguntas= Encuesta::find($encuesta_id)->preguntas;
+        $variables= Variable::where('encuesta_id', $encuesta_id)->get();
+        $empresa= Empresa::first();
+        $admin= Admin::where('id', Auth::id())->get();
+
+
+        date_default_timezone_set('America/Tijuana');
+        $date = date('m/d/Y h:i:s a', time());
 
         $f= [];
-
+        $promediosBajos= [];
         for($i= 0; $i<sizeof($promedios); $i++){
 
-            if($promedios[$i] <= 3){
+            if($promedios[$i] <= 2.9999){
+                array_push($promediosBajos,$promedios[$i]);
                 $obj= new PreguntaObj();
 
-                $obj->pregunta= $preguntas[$i];
+                $obj->pregunta= $variables[$i];
                 $obj->indicador= $indicadores[$i];
                 $obj->media= $promedios[$i];
 
@@ -131,8 +142,10 @@ class ResultadosController extends Controller
         }
 
 //        return $f;
+
 //        return view('descargar', compact( 'departamento', 'encuesta', 'media_encuesta', 'f'));
-        $pdf= PDF::loadView('descargar', compact( 'departamento', 'encuesta', 'media_encuesta', 'f'));
+
+        $pdf= PDF::loadView('descargar', compact( 'departamento', 'encuesta', 'media_encuesta', 'f', 'empresa', 'admin', 'date'));
         return $pdf->download('reporte.pdf');
     }
 }
