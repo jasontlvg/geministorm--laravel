@@ -37,11 +37,11 @@
                                 <input type="text" name="nombre" placeholder="Ingrese el Nombre de la Empresa">
                             </div>
                             <div class="field">
-                                <label>Giro</label>
+                                <label>Proceso</label>
                                 <input type="text" name="giro" placeholder="Last Name">
                             </div>
                             <div class="field">
-                                <label>Proceso</label>
+                                <label>Giro</label>
                                 <select class="ui search dropdown" name="proceso">
                                     <option value="" >Seleccione un Proceso</option>
                                     <option value="Microempresa">Microempresa</option>
