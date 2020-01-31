@@ -17,7 +17,7 @@
     </div>
 
     <div class="contenedor contenedor--acciones">
-        <h2>Acciones de mejora para ChangeOver</h2>
+        <h2>Acciones de mejora para ChangeOver:</h2>
     </div>
 
     <div class="contenedor">
@@ -35,6 +35,18 @@
             <p class="titulo">Media</p>
             <p class="descripcion">{{$media_encuesta}}</p>
         </div>
+
+        <div class="columna">
+            <p class="titulo">Fecha de Solicitud</p>
+            <p class="descripcion">{{$date}}</p>
+        </div>
+
+        <div class="columna">
+            <p class="titulo">Administrador</p>
+            <p class="descripcion">{{$admin[0]->name}}</p>
+        </div>
+
+
 
     </div>
 
@@ -61,12 +73,12 @@
 
     </div>
 
-    <div class="conte">
-        <div class="info">
-            <p><strong>Fecha de Solicitud:</strong> {{$date}}</p>
-            <p><strong>Administrador quien solicita reporte:</strong> {{$admin[0]->name}}</p>
-        </div>
-    </div>
+{{--    <div class="conte">--}}
+{{--        <div class="info">--}}
+{{--            <p><strong>Fecha de Solicitud:</strong> {{$date}}</p>--}}
+{{--            <p><strong>Administrador quien solicita reporte:</strong> {{$admin[0]->name}}</p>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

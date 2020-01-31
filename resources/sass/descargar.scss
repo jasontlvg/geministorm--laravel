@@ -3,15 +3,18 @@
 //}
 .contenedor{
     width: 100vw !important;
+    margin-bottom: 1em;
     &--acciones{
         h2{
-            font-size: 1.5em;
+            font-size: 1em;
         }
+        margin-bottom: 1em;
     }
 
     &--titulo{
         width: 100%;
         text-align: center;
+
 
     }
 }
@@ -26,7 +29,6 @@
         margin: 0;
         font-weight: bold;
         font-size: 1em;
-
     }
 
     .descripcion{
