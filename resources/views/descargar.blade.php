@@ -17,7 +17,7 @@
     </div>
 
     <div class="contenedor contenedor--acciones">
-        <h2>Acciones</h2>
+        <h2>Acciones de mejora para ChangeOver</h2>
     </div>
 
     <div class="contenedor">
