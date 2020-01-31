@@ -31,7 +31,7 @@ $factory->define(User::class, function (Faker $faker) {
         'escolaridad' => $faker->randomElement($array = array ('Primaria','Secundaria','Preparatoria','Tecnica','Universidad')),
         'departamento_id' => $faker->randomElement($array = array (1,2,3,4,5)),
 //        'password' => '$2y$10$YkpG5/TAVO5kjp/IV3zmouIFhmafAi8Lti7m/QwaZ.5CmZmRJWN7y', // password
-        'password' => '$2y$10$gxwuSKjMoo9fXLeIwgFDLuuAtmNTRxK4sIwIcX0hNSw.fFP5ZJOz6', // password
+        'password' => '$2y$10$ZZGCSbz7HME0.HHEqblqmuXdYWdiYHjLeKH9QhffAoSxwP2K.X5xW', // password
         'remember_token' => Str::random(10),
     ];
 });
