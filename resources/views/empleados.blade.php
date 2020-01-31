@@ -62,6 +62,7 @@
                                 </tr>
                             @endforeach
                             </tbody>
+{{--                            {{$empleados->links()}}--}}
                         </table>
                         <div class="ui mini test modal transition hidden eliminar">
                             <div class="header">¿Esta seguro?</div>

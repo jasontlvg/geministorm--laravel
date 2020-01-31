@@ -23,6 +23,7 @@ class EmpleadosController extends Controller{
 
 
         $empleados= User::all();
+//        $empleados= User::paginate(6);
         $departamentosExists= true;
         $departamentos= Departamento::select('id','nombre')->get();
 
