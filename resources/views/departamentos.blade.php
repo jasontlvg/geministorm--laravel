@@ -12,8 +12,10 @@
     <aside class="aside" id="aside">
         <div class="aside__logo"><i class="fas fa-bars aside__logo__burguer" id="burguer"></i>
             <a href="/" class="aside__logo__container">
-                <i class="fas fa-poo-storm aside__logo__container__logo"></i>
-                <h1 class="aside__logo__container__title">GEMINI</h1>
+                <div class="aside__logo__container__symbol">
+                    <h2 class="aside__logo__container__symbol__title">4P'S</h2>
+                </div>
+                <h3 class="aside__logo__container__h">Changeover</h3>
             </a>
         </div>
         @component('components.links')@endcomponent

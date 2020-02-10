@@ -13,7 +13,7 @@
             <div class="logoContainer">
                 <h1 class="logoContainer__title">4P'S</h1>
             </div>
-            <h2 class="welcome__titles__h">ChangeOvers</h2>
+            <h2 class="welcome__titles__h">Changeover</h2>
         </div>
     </section>
     <section class="login">

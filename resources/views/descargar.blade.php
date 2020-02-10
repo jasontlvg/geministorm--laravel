@@ -17,7 +17,7 @@
     </div>
 
     <div class="contenedor contenedor--acciones">
-        <h2>Acciones de mejora para ChangeOver:</h2>
+        <h2>Acciones de mejora para Changeover:</h2>
     </div>
 
     <div class="contenedor">
@@ -45,8 +45,6 @@
             <p class="titulo">Administrador</p>
             <p class="descripcion">{{$admin[0]->name}}</p>
         </div>
-
-
 
     </div>
 
