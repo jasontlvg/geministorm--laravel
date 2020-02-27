@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title><meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Departamentos</title><meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="/css/departamentos.css" rel="stylesheet"></head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 <body>
@@ -72,7 +72,7 @@
                                     <input type="text" name="nombre" placeholder="Nombre del departamento">
                                 </div>
                                 <div class="field">
-                                    <label>Clave</label>
+                                    <label>Clave (Igual o mayor a 6 digitos)</label>
                                     <input type="password" name="clave" placeholder="Crea una Clave">
                                 </div>
 {{--                                <div class="ui yellow message errorValidacion">--}}

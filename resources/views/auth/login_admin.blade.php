@@ -23,15 +23,41 @@
         <form class="ui form login__form " method="POST" action="{{ route('admin.login.submit') }}">
             @csrf
             <div class="field">
-                <label>Correo</label><input type="text" name="email" placeholder="ejemplo@gmail.com" class="inpuText">
+                <label>Correo</label>
+                <input type="text" name="email" placeholder="ejemplo@gmail.com" class="inpuText" value="{{old("email")}}">
             </div>
+            @if ($errors->has('email'))
+                <span class="error-msg" role="alert">
+                    <strong class="alert"> {{ $errors->first('email') }}</strong>
+                </span>
+            @endif
+
+
             <div class="field">
                 <label>Contraseña</label><input type="password" name="password" placeholder="********" class="inpuText">
-            </div><button class="ui button login__form__submit" type="submit">Iniciar sesión</button>
+            </div>
+            @if ($errors->has('password'))
+                <span class="error-msg" role="alert">
+                    <strong class="alert">{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+
+
+            <button class="ui button login__form__submit" type="submit">Iniciar sesión</button>
         </form>
-        <div class="login__otherUser"><a class="login__otherUser__login" href="#"><i class="user secret icon"></i>
-                <p>Administrador</p></a></div>
-    </section><a class="access empleadoBackground" href="{{ route('login') }}"><i class="user icon"></i></a>
+
+
+
+        <div class="login__otherUser">
+            <a class="login__otherUser__login" href="#"><i class="user secret icon"></i>
+                <p>Administrador</p>
+            </a>
+        </div>
+    </section>
+
+    <a class="access empleadoBackground" href="{{ route('login') }}">
+        <i class="user icon"></i>
+    </a>
 </div>
 <script type="text/javascript" src="/js/login.js"></script></body>
 </html>

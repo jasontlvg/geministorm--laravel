@@ -85,8 +85,8 @@
                                 <label>Sexo</label>
                                 <select class="ui search dropdown selectToClear" name="sexo">
                                     <option value="{{$empleado->sexo}}">Selecciona de Sexo</option>
-                                    <option value="AF">Masculino</option>
-                                    <option value="AX">Femenino</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
                                 </select>
                             </div>
                             @if($errors->has('sexo'))
@@ -151,7 +151,7 @@
                                     <option>Primaria</option>
                                     <option>Secundaria</option>
                                     <option>Preparatoria</option>
-                                    <option>Técnica</option>
+                                    <option>Tecnica</option>
                                     <option>Universidad</option>
                                     <option>Especialización</option>
                                     <option>Doctorado</option>
@@ -165,12 +165,16 @@
                                     <p>Escolaridad Erroneo</p>
                                 </div>
                             @endif
-
                             <div class="field">
                                 <label>Departamento</label>
-                                <select class="ui search dropdown selectToClear" name="departamento">
+                                <select class="ui search dropdown selectToClear" name="departamento" value="Electronica">
                                     @foreach($departamentos as $dep)
-                                        <option value="{{$dep->id}}">{{$dep->nombre}}</option>
+                                        @if($empleado->departamento->id == $dep->id)
+{{--                                            <option selected="selected">Medicina</option>--}}
+                                            <option selected="selected" value="{{$dep->id}}">{{$dep->nombre}}</option>
+                                        @else
+                                            <option value="{{$dep->id}}">{{$dep->nombre}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>

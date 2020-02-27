@@ -34,7 +34,7 @@
                                 <input type="text" name="nombre" placeholder="Nombre de departamento" value="{{$dep->nombre}}">
                             </div>
                             <div class="field">
-                                <label>Clave</label>
+                                <label>Clave (Igual o mayor a 6 digitos)</label>
                                 <input type="password" name="clave" placeholder="Modifica la Clave">
                             </div>
 {{--                            <div class="ui yellow message errorValidacion">--}}
