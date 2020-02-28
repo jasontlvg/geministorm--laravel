@@ -89,25 +89,29 @@
                                                 <input type="text" name="nombre" placeholder="Nombre/s" class="inputToClean" value="{{old('nombre')}}">
                                             </div>
                                             <div class="field">
-                                                <input type="text" name="apaterno" placeholder="A. Paterno"
+                                                <input type="text" name="apaterno" placeholder="A. Paterno" value="{{old('apaterno')}}"
                                                        class="inputToClean">
                                             </div>
                                             <div class="field">
-                                                <input type="text" name="amaterno" placeholder="A. Materno"
+                                                <input type="text" name="amaterno" placeholder="A. Materno" value="{{old('amaterno')}}"
                                                        class="inputToClean">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <label>Edad</label>
-                                        <input type="number" placeholder="Coloca la Edad" name="edad" class="inputToClean">
+                                        <input type="number" placeholder="Coloca la Edad" name="edad" class="inputToClean" value="{{old('edad')}}">
                                     </div>
                                     <div class="field">
                                         <label>Sexo</label>
                                         <select class="ui search dropdown selectToClear" name="sexo">
-                                            <option value="">Selecciona de Sexo</option>
-                                            <option value="AF">Masculino</option>
-                                            <option value="AX">Femenino</option>
+                                            @if(old('sexo'))
+                                                <option value="{{old('sexo')}}">Sexo</option>
+                                            @else
+                                                <option value="">Sexo</option>
+                                            @endif
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
                                         </select></div>
                                     <div class="field">
                                         <label>Email</label>
@@ -122,11 +126,21 @@
                                     <div class="field">
                                         <label>Cargo</label>
                                         <select class="ui search dropdown selectToClear" name="cargo">
+                                            @if(old('cargo'))
+                                                <option value="{{old('cargo')}}">Selecciona un cargo</option>
+                                            @else
+                                                <option value="">Selecciona un cargo</option>
+                                            @endif
                                             @component('components.cargosEmpleados')@endcomponent
                                         </select></div>
                                     <div class="field">
                                         <label>Jornada</label>
                                         <select class="ui search dropdown selectToClear" name="jornada">
+                                            @if(old('jornada'))
+                                                <option value="{{old('jornada')}}">Selecciona una jornada</option>
+                                            @else
+                                                <option value="">Selecciona una jornada</option>
+                                            @endif
                                             <option>Diurna</option>
                                             <option>Nocturna</option>
                                             <option>Mixta</option>
@@ -134,6 +148,11 @@
                                     <div class="field">
                                         <label>Escolaridad</label>
                                         <select class="ui search dropdown selectToClear" name="escolaridad">
+                                            @if(old('escolaridad'))
+                                                <option value="{{old('escolaridad')}}">Selecciona una escolaridad</option>
+                                            @else
+                                                <option value="">Selecciona una escolaridad</option>
+                                            @endif
                                             <option>Primaria</option>
                                             <option>Secundaria</option>
                                             <option>Preparatoria</option>

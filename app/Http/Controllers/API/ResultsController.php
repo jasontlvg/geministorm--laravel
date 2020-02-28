@@ -217,24 +217,18 @@ class ResultsController extends Controller
     }
 
     public function reactivarEncuesta($departamento, $encuesta){
-//        return $encuesta;
+
+        return response()->json('Aun no disponible', 302);
 
 
-//        $estados= Resultado::whereHas('empleado',function($query) use ($departamento) {
+//        $estados= Estado::whereHas('empleado', function ($query) use ($departamento){
 //            $query->where('departamento_id',$departamento);
-//        })->distinct()->select('encuesta_id')->with('encuesta')->get();
-
-        $estados= Estado::whereHas('empleado', function ($query) use ($departamento){
-            $query->where('departamento_id',$departamento);
-        })->where('encuesta_id', $encuesta)->where('contestado',1)->get();
-//        $ll= empty($estados);
-//        return $ll;
-        foreach ($estados as $estado) {
-            $estado->contestado=0;
-            $estado->save();
-//            return $estado;
-        }
-        return 1;
+//        })->where('encuesta_id', $encuesta)->where('contestado',1)->get();
+//        foreach ($estados as $estado) {
+//            $estado->contestado=0;
+//            $estado->save();
+//        }
+//        return 1;
 
     }
 

@@ -28,11 +28,9 @@ class RedirectIfAuthenticated
             return redirect(route('home'));
         }
 
-//        if (Auth::guard("web")->check() && Auth::guard("admin")->check()) { //Auth::guard($guard)->check() revisa si la conexion del usuario usa un guard que existe en nuestro sistema, si existe regresa true
-//            return $next($request);
-//        }elseif (Auth::guard($guard)->check()){
-//            if($guard='web'){
-//                return redirect(route('home'));
+//        if (Auth::guard($guard)->check()) {
+//            if($guard='admin'){
+//                return redirect(route('empleados.index'));
 //            }
 //        }
 
