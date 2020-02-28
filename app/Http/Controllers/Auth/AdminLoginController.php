@@ -20,10 +20,13 @@ class AdminLoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+//        $this->middleware('guest:admin')->except('logout');
     }
-    
+
     public function showLoginForm(){
+        if(Auth::guard("admin")->check()){
+            return redirect(route('empresa.index'));
+        }
         return view('auth.login_admin');
     }
 
@@ -44,7 +47,7 @@ class AdminLoginController extends Controller
 
         // Attempt to log the user in
         if(Auth::guard('admin')->attempt(['email'=>$request->email, 'password' => $request->password], $request->remember)){
-            return redirect(route('empleados.index'));
+            return redirect(route('empresa.index'));
         }
 
 //        return redirect()->back()->withInput($request->only('email')); // If unsuccesfull, the redirect to their intendet location

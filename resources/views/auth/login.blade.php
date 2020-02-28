@@ -43,7 +43,8 @@
         <div class="login__otherUser"><a class="login__otherUser__login" href="#"><i class="user secret icon"></i>
                 <p>Administrador</p></a></div>
     </section>
-    <a class="access" href="{{route('admin.login')}}"><i class="user secret icon"></i></a>
+{{--    <a class="access" href="{{route('admin.login')}}"><i class="user secret icon"></i></a>--}}
+    <a class="access" href="{{route('empresa.index')}}"><i class="user secret icon"></i></a>
 </div>
 <script type="text/javascript" src="/js/login.js"></script></body>
 </html>

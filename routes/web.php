@@ -18,8 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('lolo', function () {
-    return view('prueba');
-});
+    return "Estamos en lolo";
+})->name('lolo');
 
 
 
@@ -72,5 +72,4 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 
-
-
+Route::get('/primus', 'PruebaController@index')->name('prueba');
