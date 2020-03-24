@@ -6,8 +6,8 @@
 
 @section('content')
     <h1>Encuesta - {{$nombreEncuesta}}</h1>
-    {{$errors}}
-    <div id="boton">Aplastar</div>
+{{--    {{$errors}}--}}
+{{--    <div id="boton">Aplastar</div>--}}
     <form action="{{route('encuesta.store',$id)}}" method="POST" class="ui form" id="form">
         @csrf
         @foreach($preguntas as $p)
