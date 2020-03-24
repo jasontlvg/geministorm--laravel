@@ -31,8 +31,6 @@ class EncuestaController extends Controller
 
     public function store(Request $request,$id)
     {
-//        return $request;
-//        return $id;
 
         $preguntas=EncuestaPregunta::where('encuesta_id',$id)->select('pregunta_id')->get();
         foreach($preguntas as $pregunta){

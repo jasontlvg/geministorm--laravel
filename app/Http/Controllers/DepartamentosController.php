@@ -45,6 +45,8 @@ class DepartamentosController extends Controller
     public function store(Request $request)
     {
 
+        $val = app()->make('cache')->get('key');
+
         $this->validate($request, [
             'nombre' => 'required|min:3|unique:departamentos',
             'clave' => 'required|min:3'
